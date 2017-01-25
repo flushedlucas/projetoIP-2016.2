@@ -22,7 +22,6 @@ def exibir():
                 4 - Sair
 
                 """)
-
                 escolha = input("Opção: ")
                 if escolha == str(1):
                     print("""\n\n
