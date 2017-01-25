@@ -1,9 +1,10 @@
 def abrir():
     arq = open("estoque.txt")
-    arq = arq.readlines()
-    if arq != None:
-        for i, j in enumerate(arq):
-            arq[j] = i.split(" ")
+    text = arq.readlines()
+    arq.close()
+    if text != None:
+        for i, j in enumerate(text):
+            text[j] = i.split(" ")
         return arq
     return None
 
