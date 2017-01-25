@@ -1,4 +1,4 @@
-from Arquivos import login
+from Arquivos import login, pessoas, estoque, vendas
 def exibir():
 
     while True:
@@ -9,9 +9,11 @@ def exibir():
         """)
         selecao = input("Opcao: ")
         if selecao == str(1):
-            pass
+            vendas.comprar()
+            break
         elif selecao == str(2):
-            pass
+            vendas.vender()
+            break
         elif selecao == str(3):
             print("""
                 Sistemas de Vendas
@@ -22,44 +24,17 @@ def exibir():
                 4 - Sair
 
                 """)
-                escolha = input("Opção: ")
-                if escolha == str(1):
-                    print("""\n\n
-                    Cadastro
-
-                        1 - Cadastrar
-                        2 - Alterar
-                        3 - Consultar
-                        4 - Remover
-
-                         """)
-                    opcao = input("Opção: ")
-                    break
-                elif escolha == str(2):
-                    print("""\n\n
-                    Estoque
-
-                        1 - Cadastrar
-                        2 - Alterar
-                        3 - Consultar
-                        4 - Remover
-
-                    """)
-                    opcao = input("Opção: ")
-                    break
-                elif escolha == str(3):
-                    print("""\n\n
-                    Vendas
-
-                        1 - Por Cliente
-                        2 - Por Vendedor
-
-                    """)
-                    break
-                elif escolha == str(4):
-                    break
-                else:
-                    print("Opção inválida\n\n")
+            escolha = input("Opção: ")
+            if escolha == str(1):
+                pessoas.iniciar()
+            elif escolha == str(2):
+                estoque.iniciar()
+            elif escolha == str(3):
+                vendas.relatorio()
+            elif escolha == str(4):
+                break
+            else:
+                print("Opção inválida\n\n")
 
 def entrar():
     while True:
