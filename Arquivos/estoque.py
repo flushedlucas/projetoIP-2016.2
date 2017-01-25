@@ -30,9 +30,9 @@ def pesquisar(nome):
     return None
 
 def remover(nome):
-    remover = pesquisar(nome, "fornecedor")
+    remover = pesquisar(nome)
     if remover != None:
-        arq = open("fornecedor.txt")
+        arq = open("produto.txt")
         text = arq.readlines()
         arq.close()
         if text != None:
@@ -41,7 +41,7 @@ def remover(nome):
             for x in text:
                 if x == remover:
                     text.remove(remover)
-        arq = open("fornecedor.txt", "w")
+        arq = open("produto.txt", "w")
         for t in text:
             for u in t:
                 arq.write(u + ",")
@@ -49,7 +49,7 @@ def remover(nome):
         arq.close()
 
 def consultar(nome):
-    lista = pesquisar(nome, "fornecedor")
+    lista = pesquisar(nome)
     if lista != None:
         print("""Codigo: %s
             Categoria: %s
@@ -91,14 +91,18 @@ def adicionar():
     arq.write("\n")
     arq.close()
 
+def verificaEstoque():
+    pass
+
 def iniciar():
-    print("""
-        Estoque
+    while True:
+        print("""
+            Estoque
 
-            1 - Cadastrar
-            2 - Alterar
-            3 - Consultar
-            4 - Remover
+                1 - Cadastrar
+                2 - Alterar
+                3 - Consultar
+                4 - Remover
 
-        """)
-    opcao = input("Opção: ")
+            """)
+        opcao = input("Opção: ")
