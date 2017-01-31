@@ -12,8 +12,7 @@ def montaCliente():
     rg = input("Digite o RG: ")
     cpf = input("Digite o CPF/CNPJ: ")
     data = input("Digite o Data de Nascimento: ")
-    foto = input("Digite o Foto: ")
-    cliente = [nome, endereco, bairro, cidade, cep, estado, telefone, celular, fax, email, rg, cpf, data, foto]
+    cliente = [nome, endereco, bairro, cidade, cep, estado, telefone, celular, fax, email, rg, cpf, data]
     return cliente
 
 def montaFornecedor():
@@ -60,9 +59,9 @@ def pesquisar(nome, opcao):
     return None
 
 def removerCliente(nome):
-    remover = pesquisar(nome, "cliente")
+    remover = pesquisar(nome, "clientes")
     if remover != None:
-        arq = open("cliente.txt")
+        arq = open("clientes.txt")
         text = arq.readlines()
         arq.close()
         if text != None:
@@ -71,7 +70,7 @@ def removerCliente(nome):
             for x in text:
                 if x == remover:
                     text.remove(remover)
-        arq = open("cliente.txt", "w")
+        arq = open("clientes.txt", "w")
         for t in text:
             for u in t:
                 arq.write(u + ",")
@@ -79,9 +78,9 @@ def removerCliente(nome):
         arq.close()
 
 def removerFornecedor(nome):
-    remover = pesquisar(nome, "fornecedor")
+    remover = pesquisar(nome, "fornecedores")
     if remover != None:
-        arq = open("fornecedor.txt")
+        arq = open("fornecedores.txt")
         text = arq.readlines()
         arq.close()
         if text != None:
@@ -90,7 +89,7 @@ def removerFornecedor(nome):
             for x in text:
                 if x == remover:
                     text.remove(remover)
-        arq = open("fornecedor.txt", "w")
+        arq = open("fornecedores.txt", "w")
         for t in text:
             for u in t:
                 arq.write(u + ",")
@@ -98,9 +97,9 @@ def removerFornecedor(nome):
         arq.close()
 
 def removerFuncionario(nome):
-    remover = pesquisar(nome, "funcionario")
+    remover = pesquisar(nome, "funcionarios")
     if remover != None:
-        arq = open("funcionario.txt")
+        arq = open("funcionarios.txt")
         text = arq.readlines()
         arq.close()
         if text != None:
@@ -109,7 +108,7 @@ def removerFuncionario(nome):
             for x in text:
                 if x == remover:
                     text.remove(remover)
-        arq = open("funcionario.txt", "w")
+        arq = open("funcionarios.txt", "w")
         for t in text:
             for u in t:
                 arq.write(u + ",")
@@ -117,7 +116,7 @@ def removerFuncionario(nome):
         arq.close()
 
 def consultar_cliente(nome):
-    lista = pesquisar(nome, "cliente")
+    lista = pesquisar(nome, "clientes")
     if lista != None:
         print("""
         Nome: %s
@@ -132,13 +131,12 @@ def consultar_cliente(nome):
         Email: %s
         RG: %s
         CPF/CNPJ: %s
-        Data de Nascimento: %s
-        Foto: %s\n""" % (lista[0], lista[1], lista[2], lista[3], lista[4], lista[5], lista[6], lista[7], lista[8], lista[9], lista[10], lista[11], lista[12], lista[13]))
+        Data de Nascimento: %s\n""" % (lista[0], lista[1], lista[2], lista[3], lista[4], lista[5], lista[6], lista[7], lista[8], lista[9], lista[10], lista[11], lista[12]))
     else:
         print("Pessoa Nao Encontrada")
 
 def consultar_fornecedor(nome):
-    lista = pesquisar(nome, "fornecedor")
+    lista = pesquisar(nome, "fornecedores")
     if lista != None:
         print("""Nome: %s
         CPF/CNPJ: %s
@@ -155,7 +153,7 @@ def consultar_fornecedor(nome):
     print("Pessoa Nao Encontrada")
 
 def consultar_funcionario(nome):
-    lista = pesquisar(nome, "funcionario")
+    lista = pesquisar(nome, "funcionarios")
     if lista != None:
         print("""Nome: %s
         Cargo: %s
@@ -172,10 +170,10 @@ def consultar_funcionario(nome):
     print("Pessoa Nao Encontrada")
 
 def alterar_cliente(nome):
-    alterar = pesquisar(nome, "cliente")
+    alterar = pesquisar(nome, "clientes")
     if alterar != None:
         novo = montaCliente()
-        arq = open("cliente.txt")
+        arq = open("clientes.txt")
         text = arq.readlines()
         arq.close()
         if text != None:
@@ -184,7 +182,7 @@ def alterar_cliente(nome):
         for i, j in enumerate(text):
             if i == alterar:
                 text[j] = novo
-        arq = open("funcionario.txt", "w")
+        arq = open("clientes.txt", "w")
         for t in text:
             for u in t:
                 arq.write(u + ",")
@@ -192,10 +190,10 @@ def alterar_cliente(nome):
         arq.close()
 
 def alterar_fornecedor(nome):
-    alterar = pesquisar(nome, "fornecedor")
+    alterar = pesquisar(nome, "fornecedores")
     if alterar != None:
         novo = montaFornecedor()
-        arq = open("fornecedor.txt")
+        arq = open("fornecedores.txt")
         text = arq.readlines()
         arq.close()
         if text != None:
@@ -204,7 +202,7 @@ def alterar_fornecedor(nome):
         for i, j in enumerate(text):
             if i == alterar:
                 text[j] = novo
-        arq = open("fornecedor.txt", "w")
+        arq = open("fornecedores.txt", "w")
         for t in text:
             for u in t:
                 arq.write(u + ",")
@@ -212,10 +210,10 @@ def alterar_fornecedor(nome):
         arq.close()
 
 def alterar_funcionario(nome):
-    alterar = pesquisar(nome, "funcionario")
+    alterar = pesquisar(nome, "funcionarios")
     if alterar != None:
         novo = montaFuncionario()
-        arq = open("funcionario.txt")
+        arq = open("funcionarios.txt")
         text = arq.readlines()
         arq.close()
         if text != None:
@@ -224,7 +222,7 @@ def alterar_funcionario(nome):
         for i, j in enumerate(text):
             if i == alterar:
                 text[j] = novo
-        arq = open("funcionario.txt", "w")
+        arq = open("funcionarios.txt", "w")
         for t in text:
             for u in t:
                 arq.write(u + ",")
@@ -233,7 +231,7 @@ def alterar_funcionario(nome):
 
 def adicionar_cliente():
     adiciona = montaCliente()
-    arq = open("cliente.txt", "a")
+    arq = open("clientes.txt", "a")
     for i in adiciona:
         arq.write(i + ",")
     arq.write("\n")
@@ -241,7 +239,7 @@ def adicionar_cliente():
 
 def adicionar_fornecedor():
     adiciona = montaFornecedor()
-    arq = open("fornecedor.txt", "a")
+    arq = open("fornecedores.txt", "a")
     for i in adiciona:
         arq.write(i + ",")
     arq.write("\n")
@@ -249,7 +247,7 @@ def adicionar_fornecedor():
 
 def adicionar_funcionario():
     adiciona = montaFuncionario()
-    arq = open("funcionario.txt", "a")
+    arq = open("funcionarios.txt", "a")
     for i in adiciona:
         arq.write(i+",")
     arq.write("\n")

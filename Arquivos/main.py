@@ -1,6 +1,6 @@
 from Arquivos import login, pessoas, estoque, vendas
 def exibir():
-
+    estoque.verificaEstoque()
     while True:
         print("""
             1 - Comprar
