@@ -62,6 +62,13 @@ def consultar(nome):
         return
     print("Produto Nao Encontrado")
 
+
+def vender(produto):
+    pass
+
+def comprar():
+    pass
+
 def alterar(nome):
     alterar = pesquisar(nome)
     if alterar != None:
