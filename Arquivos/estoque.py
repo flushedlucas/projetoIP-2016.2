@@ -64,10 +64,43 @@ def consultar(nome):
 
 
 def vender(produto):
-    pass
+    qtd = input("Digite a quantidade: ")
+    if qtd != None:
+        arq = open("estoque.txt")
+        text = arq.readlines()
+        arq.close()
+        if text != None:
+            for i, j in enumerate(text):
+                text[j] = i.split(" ")
+        for i, j in enumerate(text):
+            if i[0] == produto[0]:
+                text[j][1] = str(int(text[j][1]) - int(qtd))
+        arq = open("produtos.txt", "w")
+        for t in text:
+            for u in t:
+                arq.write(u + ",")
+            arq.write("\n")
+        arq.close()
 
-def comprar():
-    pass
+def comprar(produto):
+    qtd = input("Digite a quantidade: ")
+    if qtd != None:
+        arq = open("estoque.txt")
+        text = arq.readlines()
+        arq.close()
+        if text != None:
+            for i, j in enumerate(text):
+                text[j] = i.split(" ")
+        for i, j in enumerate(text):
+            if i[0] == produto[0]:
+                text[j][1] = str(int(text[j][1]) + int(qtd))
+        arq = open("produtos.txt", "w")
+        for t in text:
+            for u in t:
+                arq.write(u + ",")
+            arq.write("\n")
+        arq.close()
+
 
 def alterar(nome):
     alterar = pesquisar(nome)

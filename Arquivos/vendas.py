@@ -3,14 +3,14 @@ def comprar():
     nome = input("Digite o nome do produto: ")
     if nome != None:
         produto = estoque.pesquisar(nome)
-        cliente = input("Digite o nome do fornecedor: ")
-        if cliente != None:
-            vendedor = input("Digite o nome do Funcionario: ")
-            if vendedor != None:
+        fornecedor = input("Digite o nome do fornecedor: ")
+        if fornecedor != None:
+            funcionario = input("Digite o nome do Funcionario: ")
+            if funcionario != None:
                 apv = estoque.comprar(produto)
                 if apv != None:
-                    arq = open("vendas.txt", "a")
-                    arq.writeline([produto, vendedor, cliente])
+                    arq = open("compras.txt", "a")
+                    arq.writeline([produto, funcionario, fornecedor])
                     arq.close()
 
 def vender():
@@ -37,7 +37,9 @@ def relatorio():
             """)
     opcao = input("Digite a opcao: ")
     if opcao == str(1):
-        pass
+        arq = open("vendas.txt")
+        linhas = arq.readlines()
+
     elif opcao == str(2):
         pass
     else:
