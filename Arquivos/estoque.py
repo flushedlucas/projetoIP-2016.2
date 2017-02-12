@@ -133,6 +133,7 @@ def adicionar():
     arq.close()
 
 def verificaEstoque():
+    lista = []
     arq = open("estoque.txt")
     text = arq.readlines()
     if text != None:
@@ -140,7 +141,7 @@ def verificaEstoque():
             text[j] = i.split[","]
         for x in text:
             if int(text[1]) < int(text[2]):
-                print(text[0] + " com estoque baixo.")
+                lista.append(text[0] + " com estoque baixo.")
 
 def iniciar():
     while True:
