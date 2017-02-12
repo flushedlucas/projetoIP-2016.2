@@ -1,5 +1,5 @@
 def buscar(lista):
-    usuarios = [["swameze", "swamy", "1234"],["gilberto", "gil", "5678"],["felipe", "lipe", "1020"]]
+    usuarios = [["swameze", "1234"],["gilberto", "5678"],["felipe", "1020"]]
     for i in usuarios:
         if lista == i:
             return True
