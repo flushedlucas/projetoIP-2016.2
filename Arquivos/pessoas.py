@@ -66,7 +66,7 @@ def removerCliente(nome):
         arq.close()
         if text != None:
             for i, j in enumerate(text):
-                text[j] = i.split(" ")
+                text[i] = j.split(",")
             for x in text:
                 if x == remover:
                     text.remove(remover)
@@ -85,7 +85,7 @@ def removerFornecedor(nome):
         arq.close()
         if text != None:
             for i, j in enumerate(text):
-                text[j] = i.split(" ")
+                text[i] = j.split(",")
             for x in text:
                 if x == remover:
                     text.remove(remover)
@@ -104,7 +104,7 @@ def removerFuncionario(nome):
         arq.close()
         if text != None:
             for i, j in enumerate(text):
-                text[j] = i.split(" ")
+                text[i] = j.split(",")
             for x in text:
                 if x == remover:
                     text.remove(remover)
@@ -178,10 +178,10 @@ def alterar_cliente(nome):
         arq.close()
         if text != None:
             for i, j in enumerate(text):
-                text[j] = i.split(" ")
+                text[i] = j.split(",")
         for i, j in enumerate(text):
-            if i == alterar:
-                text[j] = novo
+            if j == alterar:
+                text[i] = novo
         arq = open("clientes.txt", "w")
         for t in text:
             for u in t:
@@ -198,10 +198,10 @@ def alterar_fornecedor(nome):
         arq.close()
         if text != None:
             for i, j in enumerate(text):
-                text[j] = i.split(" ")
+                text[i] = j.split(",")
         for i, j in enumerate(text):
-            if i == alterar:
-                text[j] = novo
+            if j == alterar:
+                text[i] = novo
         arq = open("fornecedores.txt", "w")
         for t in text:
             for u in t:
@@ -218,10 +218,10 @@ def alterar_funcionario(nome):
         arq.close()
         if text != None:
             for i, j in enumerate(text):
-                text[j] = i.split(" ")
+                text[i] = j.split(",")
         for i, j in enumerate(text):
-            if i == alterar:
-                text[j] = novo
+            if j == alterar:
+                text[i] = novo
         arq = open("funcionarios.txt", "w")
         for t in text:
             for u in t:
@@ -301,15 +301,14 @@ def iniciar():
                     """)
                 opcao2 = input("Opcao: ")
                 nome = input("Digite o nome: ")
-                alterar_cliente(nome)
                 if opcao2 == str(1):
-                    alterar_cliente()
+                    alterar_cliente(nome)
                     break
                 elif opcao2 == str(2):
-                    alterar_fornecedor()
+                    alterar_fornecedor(nome)
                     break
                 elif opcao2 == str(3):
-                    alterar_funcionario()
+                    alterar_funcionario(nome)
                     break
                 else:
                     print("Opcao Invalida")
@@ -349,14 +348,15 @@ def iniciar():
 
                     """)
                 opcao4 = input("Opcao: ")
+                nome = input("Digite o nome: ")
                 if opcao4 == str(1):
-                    removerCliente()
+                    removerCliente(nome)
                     break
                 elif opcao4 == str(2):
-                    removerFornecedor()
+                    removerFornecedor(nome)
                     break
                 elif opcao4 == str(3):
-                    removerFuncionario()
+                    removerFuncionario(nome)
                     break
                 else:
                     print("Opcao Invalida")
