@@ -1,6 +1,12 @@
 from Arquivos import login, pessoas, estoque, vendas
+#from login import *
+#from pessoas import *
+#from estoque import *
+#from vendas import *
+
 def exibir():
-    estoque.verificaEstoque()
+    #estoque.verificaEstoque()
+    verificaEstoque()
     while True:
         print("""
             1 - Comprar
@@ -10,9 +16,11 @@ def exibir():
         selecao = input("Opcao: ")
         if selecao == str(1):
             vendas.comprar()
+            exibir()
             break
         elif selecao == str(2):
             vendas.vender()
+            exibir()
             break
         elif selecao == str(3):
             print("""
@@ -41,7 +49,8 @@ def entrar():
         nome = input("Digite seu Nome: ")
         senha = input("Digite a Senha: ")
         lista = [str(nome).lower(), str(senha).lower()]
-        result = login.buscar(lista)
+        #result = login.buscar(lista)
+        result = buscar(lista)
         if result == True:
             exibir()
             break

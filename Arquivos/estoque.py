@@ -22,7 +22,9 @@ def abrir():
 
 def pesquisar(nome):
     nome = nome.lower()
-    produto = abrir()
+    arq = open("produtos.txt")
+    produto = arq.readlines()
+    arq.close()
     if produto != None:
         for i, j in enumerate(produto):
             if j[0].lower() == nome:
@@ -100,6 +102,7 @@ def comprar(produto):
                 arq.write(u + ",")
             arq.write("\n")
         arq.close()
+
 
 
 def alterar(nome):
