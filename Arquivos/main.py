@@ -14,11 +14,14 @@ def exibir():
         """)
         selecao = input("Opcao: ")
         if selecao == str(1):
-            vendas.comprar()
+            if estoque.abrir() != None:
+                estoque.comprar()
+            else:
+                print("Nenhum produto cadastrado")
             exibir()
             break
         elif selecao == str(2):
-            vendas.vender()
+            estoque.vender()
             exibir()
             break
         elif selecao == str(3):

@@ -1,22 +1,21 @@
 def montaProduto():
     codigo = input("Digite o código: ")
     categoria = input("Digite a Categoria: ")
-    foto = input("Digite a Foto: ")
     descricao = input("Digite a descricao: ")
     estoqueMax = input("Digite o Estoque Maximo: ")
     estoqueMin = input("Digite o Estoque Minimo: ")
     valorvenda = input("Digite o Valor Base de Venda: ")
     valorcompra = input("Digite o Valor Base de Compra: ")
-    produto = [codigo, categoria, foto, descricao, estoqueMax, estoqueMin, valorvenda, valorcompra]
+    produto = [codigo, categoria, descricao, estoqueMax, estoqueMin, valorvenda, valorcompra]
     return produto
 
 def abrir():
-    arq = open("estoque.txt")
+    arq = open("produtos.txt")
     text = arq.readlines()
     arq.close()
     if text != None:
         for i, j in enumerate(text):
-            text[j] = i.split(" ")
+            text[i] = j.split(",")
         return arq
     return None
 
@@ -27,8 +26,10 @@ def pesquisar(nome):
     arq.close()
     if produto != None:
         for i, j in enumerate(produto):
+            produto[i] = j.split(",")
+        for i, j in enumerate(produto):
             if j[0].lower() == nome:
-                return i
+                return j
     return None
 
 def remover(nome):
@@ -39,7 +40,7 @@ def remover(nome):
         arq.close()
         if text != None:
             for i, j in enumerate(text):
-                text[j] = i.split(" ")
+                text[j] = i.split(",")
             for x in text:
                 if x == remover:
                     text.remove(remover)
@@ -60,48 +61,61 @@ def consultar(nome):
             Estoque Minimo: %s
             Valor Base de Venda: %s
             Valor Base de Compra: %s""" % (
-        lista[0], lista[1], lista[2], lista[3], lista[4], lista[5], lista[6], lista[7], lista[8], lista[9]))
+        lista[0], lista[1], lista[2], lista[3], lista[4], lista[5], lista[6]))
         return
     print("Produto Nao Encontrado")
 
 
-def vender(produto):
-    qtd = input("Digite a quantidade: ")
-    if qtd != None:
-        arq = open("estoque.txt")
-        text = arq.readlines()
-        arq.close()
-        if text != None:
-            for i, j in enumerate(text):
-                text[j] = i.split(" ")
-        for i, j in enumerate(text):
-            if i[0] == produto[0]:
-                text[j][1] = str(int(text[j][1]) - int(qtd))
-        arq = open("produtos.txt", "w")
-        for t in text:
-            for u in t:
-                arq.write(u + ",")
-            arq.write("\n")
-        arq.close()
+def vender():
+    codigo = input("Digite o codigo do produto: ")
+    if codigo != None:
+        produto = pesquisar(codigo)
+        if produto != None:
+            qtd = input("Digite a quantidade: ")
+            if qtd != None:
+                arq = open("estoque.txt")
+                text = arq.readlines()
+                arq.close()
+                if text != None:
+                    for i, j in enumerate(text):
+                        text[j] = i.split(",")
+                for i, j in enumerate(text):
+                    if i[0] == produto[0]:
+                        text[j][1] = str(int(text[j][1]) - int(qtd))
+                arq = open("produtos.txt", "w")
+                for t in text:
+                    for u in t:
+                        arq.write(u + ",")
+                    arq.write("\n")
+                arq.close()
 
-def comprar(produto):
-    qtd = input("Digite a quantidade: ")
-    if qtd != None:
-        arq = open("estoque.txt")
-        text = arq.readlines()
-        arq.close()
-        if text != None:
-            for i, j in enumerate(text):
-                text[j] = i.split(" ")
-        for i, j in enumerate(text):
-            if i[0] == produto[0]:
-                text[j][1] = str(int(text[j][1]) + int(qtd))
-        arq = open("produtos.txt", "w")
-        for t in text:
-            for u in t:
-                arq.write(u + ",")
-            arq.write("\n")
-        arq.close()
+def comprar():
+    codigo = input("Digite o codigo do produto: ")
+    if codigo != None:
+        produto = pesquisar(codigo)
+        if produto != None:
+            qtd = input("Digite a quantidade: ")
+            if qtd != None:
+                listavazia = []
+                arq = open("estoque.txt")
+                text = arq.readlines()
+                arq.close()
+                if text != None and text != listavazia:
+                    for i, j in enumerate(text):
+                        text[i] = j.split(",")
+                    for i, j in enumerate(text):
+                        if j[0] == produto[0]:
+                            text[i][1] = str(int(text[i][1]) + int(qtd))
+                    arq = open("estoque.txt", "w")
+                    for t in text:
+                        for u in t:
+                            arq.write(u + ",")
+                        arq.write("\n")
+                    arq.close()
+                else:
+                    arq = open("estoque.txt", "a")
+                    arq.write(produto[0] +"," + qtd + "," + produto[3] + ","+ produto[4] + "," + "\n")
+                    arq.close()
 
 
 
@@ -114,10 +128,10 @@ def alterar(nome):
         arq.close()
         if text != None:
             for i, j in enumerate(text):
-                text[j] = i.split(" ")
+                text[i] = i.split(",")
         for i, j in enumerate(text):
             if i == alterar:
-                text[j] = novo
+                text[i] = novo
         arq = open("produtos.txt", "w")
         for t in text:
             for u in t:
@@ -136,15 +150,14 @@ def adicionar():
     arq.close()
 
 def verificaEstoque():
-    lista = []
     arq = open("estoque.txt")
     text = arq.readlines()
+    arq.close()
     if text != None:
-        for i, j in text:
-            text[j] = i.split[","]
-        for x in text:
-            if int(text[1]) < int(text[2]):
-                lista.append(text[0] + " com estoque baixo.")
+        for i, j in enumerate(text):
+            text[i] = j.split(",")
+            if int(text[i][1]) < int(text[i][3]):
+                print("Produto " + text[i][0] + " com estoque baixo.")
 
 def iniciar():
     while True:
