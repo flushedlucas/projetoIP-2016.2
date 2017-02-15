@@ -5,8 +5,7 @@ from Arquivos import login, pessoas, estoque, vendas
 #from vendas import *
 
 def exibir():
-    #estoque.verificaEstoque()
-    verificaEstoque()
+    estoque.verificaEstoque()
     while True:
         print("""
             1 - Comprar
@@ -49,8 +48,7 @@ def entrar():
         nome = input("Digite seu Nome: ")
         senha = input("Digite a Senha: ")
         lista = [str(nome).lower(), str(senha).lower()]
-        #result = login.buscar(lista)
-        result = buscar(lista)
+        result = login.buscar(lista)
         if result == True:
             exibir()
             break
