@@ -48,7 +48,7 @@ def exibir():
 
 def entrar():
     while True:
-        nome = input("Digite seu Nome: ")
+        nome = input("Digite o Login: ")
         senha = input("Digite a Senha: ")
         lista = [str(nome).lower(), str(senha).lower()]
         result = login.buscar(lista)

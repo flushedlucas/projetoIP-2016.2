@@ -92,6 +92,15 @@ def vender():
                             arq.write(u + ",")
                     arq.write("\n")
                 arq.close()
+                cliente = input("digite o nome do cliente: ")
+                if cliente != None:
+                    vendedor = input("Digite o nome do vendedor: ")
+                    if vendedor != None:
+                        lista = [cliente, vendedor, codigo, qtd]
+                        arq = open("vendas.txt", "a")
+                        for i in lista:
+                            arq.write(i + ",")
+                        arq.write("\n")
 
 def comprar():
     codigo = input("Digite o codigo do produto: ")

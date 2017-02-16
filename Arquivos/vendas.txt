@@ -1,0 +1,3 @@
+pedro,tiago,321,10,
+lucas,tiago,321,10,
+pedro,joao,123,10,
