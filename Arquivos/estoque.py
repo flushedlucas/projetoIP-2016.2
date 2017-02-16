@@ -19,8 +19,8 @@ def abrir():
         return arq
     return None
 
-def pesquisar(nome):
-    nome = nome.lower()
+def pesquisar(codigo):
+    codigo = codigo.lower()
     arq = open("produtos.txt")
     produto = arq.readlines()
     arq.close()
@@ -28,12 +28,12 @@ def pesquisar(nome):
         for i, j in enumerate(produto):
             produto[i] = j.split(",")
         for i, j in enumerate(produto):
-            if j[0].lower() == nome:
+            if j[0].lower() == codigo:
                 return j
     return None
 
-def remover(nome):
-    remover = pesquisar(nome)
+def remover(codigo):
+    remover = pesquisar(codigo)
     if remover != None:
         arq = open("produtos.txt")
         text = arq.readlines()
@@ -51,8 +51,8 @@ def remover(nome):
             arq.write("\n")
         arq.close()
 
-def consultar(nome):
-    lista = pesquisar(nome)
+def consultar(codigo):
+    lista = pesquisar(codigo)
     if lista != None:
         print("""Codigo: %s
             Categoria: %s
@@ -78,14 +78,18 @@ def vender():
                 arq.close()
                 if text != None:
                     for i, j in enumerate(text):
-                        text[j] = i.split(",")
+                        text[i] = j.split(",")
                 for i, j in enumerate(text):
-                    if i[0] == produto[0]:
-                        text[j][1] = str(int(text[j][1]) - int(qtd))
-                arq = open("produtos.txt", "w")
+                    if j[0] == produto[0]:
+                        if int(text[i][1]) - int(qtd) >= 0:
+                            text[i][1] = str(int(text[i][1]) - int(qtd))
+                        else:
+                            print("Nao existem produtos em estoque suficiente")
+                arq = open("estoque.txt", "w")
                 for t in text:
                     for u in t:
-                        arq.write(u + ",")
+                        if u != '' and u != "\n":
+                            arq.write(u + ",")
                     arq.write("\n")
                 arq.close()
 
@@ -97,6 +101,7 @@ def comprar():
             qtd = input("Digite a quantidade: ")
             if qtd != None:
                 listavazia = []
+                achou = False
                 arq = open("estoque.txt")
                 text = arq.readlines()
                 arq.close()
@@ -105,22 +110,28 @@ def comprar():
                         text[i] = j.split(",")
                     for i, j in enumerate(text):
                         if j[0] == produto[0]:
-                            text[i][1] = str(int(text[i][1]) + int(qtd))
+                            if int(text[i][1]) + int(qtd) <= int(text[i][2]):
+                                text[i][1] = str(int(text[i][1]) + int(qtd))
+                                achou = True
+                            else:
+                                print("Quantidade de produtos em estoque acima do permitido")
                     arq = open("estoque.txt", "w")
                     for t in text:
                         for u in t:
-                            arq.write(u + ",")
+                            if u != '' and u != "\n":
+                                arq.write(u + ",")
                         arq.write("\n")
                     arq.close()
-                else:
+                if achou == False:
                     arq = open("estoque.txt", "a")
                     arq.write(produto[0] +"," + qtd + "," + produto[3] + ","+ produto[4] + "," + "\n")
                     arq.close()
+        else:
+            print("Produto nao encontrado.")
 
 
-
-def alterar(nome):
-    alterar = pesquisar(nome)
+def alterar(codigo):
+    alterar = pesquisar(codigo)
     if alterar != None:
         novo = montaProduto()
         arq = open("produtos.txt")
@@ -128,14 +139,15 @@ def alterar(nome):
         arq.close()
         if text != None:
             for i, j in enumerate(text):
-                text[i] = i.split(",")
+                text[i] = j.split(",")
         for i, j in enumerate(text):
-            if i == alterar:
+            if j == alterar:
                 text[i] = novo
         arq = open("produtos.txt", "w")
         for t in text:
             for u in t:
-                arq.write(u + ",")
+                if u != '' and u != "\n":
+                    arq.write(u + ",")
             arq.write("\n")
         arq.close()
     else:
@@ -175,16 +187,16 @@ def iniciar():
             adicionar()
             break
         elif opcao == str(2):
-            escolha = input("Digite o nome: ")
+            escolha = input("Digite o codigo do produto: ")
             if escolha != None:
-                alterar()
+                alterar(escolha)
             break
         elif opcao == str(3):
-            escolha = input("Digite o nome: ")
+            escolha = input("Digite o codigo do produto: ")
             consultar(escolha)
             break
         elif opcao == str(4):
-            escolha = input("Digite o nome: ")
+            escolha = input("Digite o codigo do produto: ")
             remover(escolha)
             break
         elif opcao == str(5):

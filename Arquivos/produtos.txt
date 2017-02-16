@@ -1,1 +1,2 @@
-123,padaria,p�o doce,20,5,2,1,
+123,frios,mortadela,50,10,5,3,
+321,padaria,pao doce,100,10,3,1,
