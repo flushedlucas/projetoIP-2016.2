@@ -15,12 +15,18 @@ def exibir():
         selecao = input("Opcao: ")
         if selecao == str(1):
             if estoque.abrir() != None:
+                produtos = estoque.abrir()
+                for i in produtos:
+                    estoque.consultar(i[0])
                 estoque.comprar()
             else:
                 print("Nenhum produto cadastrado")
             exibir()
             break
         elif selecao == str(2):
+            produtos = estoque.abrir()
+            for i in produtos:
+                estoque.consultar(i[0])
             estoque.vender()
             exibir()
             break

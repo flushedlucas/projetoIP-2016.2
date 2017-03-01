@@ -16,7 +16,7 @@ def abrir():
     if text != None:
         for i, j in enumerate(text):
             text[i] = j.split(",")
-        return arq
+        return text
     return None
 
 def pesquisar(codigo):
@@ -72,7 +72,8 @@ def remover(codigo):
 def consultar(codigo):
     lista = pesquisar(codigo)
     if lista != None:
-        print("""Codigo: %s
+        print("""
+            Codigo: %s
             Categoria: %s
             Descricao: %s
             Estoque Maximo: %s
