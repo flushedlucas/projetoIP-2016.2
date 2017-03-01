@@ -32,6 +32,20 @@ def pesquisar(codigo):
                 return j
     return None
 
+def procuraProduto(produto):
+    arq = open("vendas.txt")
+    text = arq.readlines()
+    arq.close()
+    if text != None:
+        for i, j in enumerate(text):
+            text[i] = j.split(",")
+        for i in text:
+            if i[2] == produto:
+                return True
+            else:
+                return False
+
+
 def remover(codigo):
     remover = pesquisar(codigo)
     if remover != None:
@@ -43,7 +57,11 @@ def remover(codigo):
                 text[j] = i.split(",")
             for x in text:
                 if x == remover:
-                    text.remove(remover)
+                    resposta = procuraProduto(remover[0])
+                    if resposta == False:
+                        text.remove(remover)
+                    else:
+                        print("Não se pode remover um produto que ja tenha sido parte de uma venda")
         arq = open("produtos.txt", "w")
         for t in text:
             for u in t:

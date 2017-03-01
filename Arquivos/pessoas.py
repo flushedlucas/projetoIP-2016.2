@@ -69,7 +69,11 @@ def removerCliente(nome):
                 text[i] = j.split(",")
             for x in text:
                 if x == remover:
-                    text.remove(remover)
+                    resposta = procuraCliente(remover[0])
+                    if resposta == False:
+                        text.remove(remover)
+                    else:
+                        print("\n\nNao se pode remover um cliente que já tenha efetuado alguma compra. \n\n")
         arq = open("clientes.txt", "w")
         for t in text:
             for u in t:
@@ -107,7 +111,11 @@ def removerFuncionario(nome):
                 text[i] = j.split(",")
             for x in text:
                 if x == remover:
-                    text.remove(remover)
+                    resposta = procuraVendedor(remover[0])
+                    if resposta == False:
+                        text.remove(remover)
+                    else:
+                        print("\n\nNao se pode remover um vendedor que já tenha vendido um produto. \n\n")
         arq = open("funcionarios.txt", "w")
         for t in text:
             for u in t:
@@ -252,6 +260,32 @@ def adicionar_funcionario():
         arq.write(i+",")
     arq.write("\n")
     arq.close()
+
+def procuraCliente(cliente):
+    arq = open("vendas.txt")
+    text = arq.readlines()
+    arq.close()
+    if text != None:
+        for i, j in enumerate(text):
+            text[i] = j.split(",")
+        for i in text:
+            if i[0] == cliente:
+                return True
+            else:
+                return False
+
+def procuraVendedor(vendedor):
+    arq = open("vendas.txt")
+    text = arq.readlines()
+    arq.close()
+    if text != None:
+        for i, j in enumerate(text):
+            text[i] = j.split(",")
+        for i in text:
+            if i[1] == vendedor:
+                return True
+            else:
+                return False
 
 def iniciar():
     while True:
