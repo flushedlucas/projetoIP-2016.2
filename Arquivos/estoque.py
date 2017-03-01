@@ -72,6 +72,20 @@ def remover(codigo):
 def consultar(codigo):
     lista = pesquisar(codigo)
     if lista != None:
+        arq = open("estoque.txt")
+        text = arq.readlines()
+        arq.close()
+        if text != None:
+            for i, j in enumerate(text):
+                text[i] = j.split(",")
+            for i in text:
+                if i[0] == lista[0]:
+                    try:
+                        lista[7] = i[1]
+                    except:
+                        lista.append(i[1])
+                else:
+                    lista.append(0)
         print("""
             Codigo: %s
             Categoria: %s
@@ -79,8 +93,10 @@ def consultar(codigo):
             Estoque Maximo: %s
             Estoque Minimo: %s
             Valor Base de Venda: %s
-            Valor Base de Compra: %s""" % (
-        lista[0], lista[1], lista[2], lista[3], lista[4], lista[5], lista[6]))
+            Valor Base de Compra: %s
+            Estoque Atual: %s""" % (
+        lista[0], lista[1], lista[2], lista[3], lista[4], lista[5], lista[6], lista[7]))
+
         return
     print("Produto Nao Encontrado")
 
