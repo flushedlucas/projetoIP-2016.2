@@ -1,3 +1,5 @@
+from Arquivos import estoque
+
 def relatorio():
     print("""
             Vendas
@@ -18,11 +20,13 @@ def relatorio():
             print("\nCliente: " + cliente)
             for i, j in enumerate(linhas):
                 if j[0] == cliente:
+                    produto = estoque.pesquisar(j[2])
                     print("""
                     Produto: %s
+                    Descricao: %s
                     Quantidade: %s
                     Vendedor %s
-                    """ %(j[2],j[3],j[1]))
+                    """ %(j[2], produto[2], j[3],j[1]))
 
     elif opcao == str(2):
         vendedor = input("Digite o nome do vendedor: ")
@@ -35,10 +39,12 @@ def relatorio():
             print("\nVendedor: " + vendedor)
             for i, j in enumerate(linhas):
                 if j[1] == vendedor:
+                    produto = estoque.pesquisar(j[2])
                     print("""
                     Produto: %s
+                    Descricao: %s
                     Quantidade: %s
                     Cliente: %s
-                    """ % (j[2], j[3], j[0]))
+                    """ % (j[2],produto[2], j[3], j[0]))
     else:
         print("Opcao Invalida")
