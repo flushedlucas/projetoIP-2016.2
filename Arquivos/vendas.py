@@ -15,10 +15,14 @@ def relatorio():
             arq.close()
             for i,j in enumerate(linhas):
                 linhas[i] = j.split(",")
-            print("\n" + cliente)
+            print("\nCliente: " + cliente)
             for i, j in enumerate(linhas):
                 if j[0] == cliente:
-                    print("Comprou %s de %s do vendedor %s" %(j[3],j[2],j[1]))
+                    print("""
+                    Produto: %s
+                    Quantidade: %s
+                    Vendedor %s
+                    """ %(j[2],j[3],j[1]))
 
     elif opcao == str(2):
         vendedor = input("Digite o nome do vendedor: ")
@@ -28,9 +32,13 @@ def relatorio():
             arq.close()
             for i, j in enumerate(linhas):
                 linhas[i] = j.split(",")
-            print("\n" + vendedor)
+            print("\nVendedor: " + vendedor)
             for i, j in enumerate(linhas):
                 if j[1] == vendedor:
-                    print("Vendeu %s de %s para o cliente %s" % (j[3], j[2], j[0]))
+                    print("""
+                    Produto: %s
+                    Quantidade: %s
+                    Cliente: %s
+                    """ % (j[2], j[3], j[0]))
     else:
         print("Opcao Invalida")
