@@ -271,8 +271,7 @@ def procuraCliente(cliente):
         for i in text:
             if i[0] == cliente:
                 return True
-            else:
-                return False
+    return False
 
 def procuraVendedor(vendedor):
     arq = open("vendas.txt")
@@ -284,8 +283,7 @@ def procuraVendedor(vendedor):
         for i in text:
             if i[1] == vendedor:
                 return True
-            else:
-                return False
+    return False
 
 def iniciar():
     while True:
