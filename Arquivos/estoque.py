@@ -224,12 +224,11 @@ def iniciar():
                 2 - Alterar
                 3 - Consultar
                 4 - Remover
-
+                5 - Voltar
             """)
         opcao = input("Opção: ")
         if opcao == str(1):
             adicionar()
-            break
         elif opcao == str(2):
             escolha = input("Digite o codigo do produto: ")
             if escolha != None:
@@ -237,16 +236,13 @@ def iniciar():
                 for i in produto:
                     consultar(i[0])
                 alterar(escolha)
-            break
         elif opcao == str(3):
             produto = abrir()
             for i in produto:
                 consultar(i[0])
-            break
         elif opcao == str(4):
             escolha = input("Digite o codigo do produto: ")
             remover(escolha)
-            break
         elif opcao == str(5):
             break
         else:
