@@ -233,6 +233,9 @@ def iniciar():
         elif opcao == str(2):
             escolha = input("Digite o codigo do produto: ")
             if escolha != None:
+                produto = abrir()
+                for i in produto:
+                    consultar(i[0])
                 alterar(escolha)
             break
         elif opcao == str(3):
